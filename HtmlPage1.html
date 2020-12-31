@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page1</title>
+    <h1>Page1</h1>
+    <!--<noscript>
+        Enable javascript in the browser to execute the page.
+    </noscript>-->
+    <script>
+        function validate() {
+            var username = document.getElementById('txtfname').value;
+            //alert(username);
+            if (username.length == 0) {
+                alert('username cannot be blank');
+                alert(username.length);
+            }
+            else {
+                alert(username);
+                alert('Thanks for the input');
+               // window.location.href = 'QueryPage.html';
+            }
+        }
+
+        function displaydate() {
+            var d = new Date();
+            console.log("this is get date= " + d.getDate());
+            console.log("this is get date= " + d.getFullYear());
+            console.log("Hello");
+            console.log("Welcome");
+            console.warn('Hello warning');
+            console.count();
+
+            document.getElementById('d1').value = d;
+            document.getElementById('todaysDate').innerHTML = d;
+            document.getElementById('p1').innerHTML = d;
+            document.getElementById('div1').innerHTML = d;
+        }
+
+       
+    </script>
+</head>
+<body>
+    <!--<script>
+    
+    </script>-->
+    <div id="div1" style="color:red;display:inline"></div>
+    <form>
+        <fieldset>
+            <legend>Personal Details</legend>
+            <p1 id="p1"></p1>
+            <label id="todaysDate"></label>
+            <input type="text" name="name" id="d1" value="" disabled />
+            <label>Enter Firstname</label>
+            <input type="text" id="txtfname" name="txtfname" value="" />
+            <br />
+            <label>Enter Age</label>
+            <input type="number" id="age" name="txtage" value="" />
+            <br />
+
+            <!--<input type="button" name="btnsend" value="Accept" onclick="validate()" />-->
+            <input type="button" value="Accept"  onclick="displaydate()" />
+        </fieldset>
+    </form>
+</body>
+</html>
