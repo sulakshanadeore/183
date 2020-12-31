@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!--<noscript>
+        Enable javascript in the browser to execute the page.
+    </noscript>-->
+    <script>
+        function validate() {
+            var username = document.getElementById('txtfname').value;
+            //alert(username);
+            if (username.length == 0) {
+                alert('username cannot be blank');
+                alert(username.length);
+            }
+            else {
+                alert(username);
+                alert('Thanks for the input');
+            }
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>Personal Details</legend>
+            <label>Enter Firstname</label>
+            <input type="text" id="txtfname" name="txtfname" value="" />
+            <br/>
+            <label>Enter Age</label>
+            <input type="number" id="age"  name="txtage" value="" />
+            <br/>
+            <input type="button" name="btnsend" value="Accept" onclick="validate()" />
+        </fieldset>
+    </form>
+</body>
+</html>
