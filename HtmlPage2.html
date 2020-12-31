@@ -3,8 +3,121 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script>
+        //var i = 10;
+        //alert(i);
+        //var I;
+        //alert(I);,
+        //var $i;
+        //alert($i);
+        //var $j;
+        //alert($j);
+        //var Value="Hello";
+        //alert(Value)
+
+        //function f1() {
+        //    var name, age, location;
+        //    name= prompt("enter name");
+        //    //alert(name);
+        //    age = prompt("enter age");
+        //    location = prompt("enter location");
+        //    alert(name);
+        //    alert(age);
+        //    alert(location);
+        //}
+
+        function f2() {
+            var text="";
+            for (i = 0; i<=5; i++) {
+                text += i + "<br/>";
+                
+
+
+            }
+            document.getElementById('p1').innerHTML = text;
+
+        }
+
+        function showdetails() {
+            var person = { fname: "John", lname: "B", age: 24, location: "Pune" };
+            var text = "";
+            var p;
+            var otherperson = person;
+            var pname = person.fname;
+            var page = person.age;
+
+            //var newdata = { fname: pname, age: page};
+            var newdata = { fname: person.fname, age: person.age, location: person.location };
+
+            for (p in newdata) {
+                text += newdata[p] + " ";
+            }
+            document.getElementById('p2').innerHTML = text;
+
+
+        }
+
+        function bikedata() {
+            var bikenames = ['Passion','Royal Enfield','Pulsar'];
+
+            var b;
+            var bn = "";
+            for (b of bikenames) {
+                bn += b + "<br/>";
+             //   document.write(b + "<br/>");
+            }
+
+            document.getElementById("bdata").innerHTML = bn;
+        }
+        function reverseOrder() {
+            var j = 5;
+            for (var i = j; i >= 0; i--) {
+                alert(i);
+            }
+        }
+
+        function whiledemo() {
+            var text = "";
+            var i = 0;
+            while (i < 3) {
+                text += "<br/> " + i;
+                i++;
+
+            }
+            document.write(text);
+
+        }
+
+        function dowhiledemo() {
+            var text = "";
+            var i = 0;
+            do {
+                text += "<br/> " + i;
+                i++;
+            } while (i<3);
+            document.write(text);
+        }
+    </script>
 </head>
 <body>
+
     <h1>thsi is second page</h1>
+
+    <div style="color:deeppink">
+        <label>Person details</label><p id="p2"></p>
+        <button onclick="showdetails()">Show Person Details</button>
+    </div>
+    <hr />
+    <label>Nos are:</label> <p id="p1"></p>
+    <button onclick="f2()">Show Nos</button>
+    <hr />
+    <p id="bdata"></p>
+    <button onclick="bikedata()">Show Nos</button>
+    <hr />
+    <button onclick="reverseOrder()">Print reverse</button>
+    <hr />
+    <button onclick="whiledemo()">While Loop</button>
+    <hr />
+    <button onclick="dowhiledemo()">DoWhile Loop</button>
 </body>
 </html>
