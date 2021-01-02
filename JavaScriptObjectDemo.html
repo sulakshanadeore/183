@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        var student = {
+            fname: "Dipti",
+            lname: "Kumar",
+            age: 20,
+            favcolor: "red",
+            fullName:function() {
+                return this.fname + this.lname;
+                //this-- owner---- student (fullname function is owned by the student object)
+            }
+        };
+        function display() {
+
+            //document.getElementById("div1").innerHTML = this.student.fname;
+            //document.getElementById("div1").innerHTML += student["lname"];
+            document.getElementById("div1").innerHTML = this.student.fullName();
+        }
+    </script>
+</head>
+<body onmousemove="display()" style="background-color:aqua;height:40px;width:100px">
+
+    <div id="div1"></div>
+
+</body>
+</html>
