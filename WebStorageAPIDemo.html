@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        function f2() {
+            window.localStorage.setItem("message", "Happy New Year");
+            var fname=document.getElementById("username").value;
+            window.localStorage.setItem("fname", fname);
+        }
+
+
+        function f1() {
+            
+            var msg = localStorage.getItem("message");
+            var uname = localStorage.getItem("fname");
+            document.getElementById("greet").innerHTML = msg + uname;
+            document.getElementById("Greetuser").value = msg + uname;
+        }
+
+        function f3() {
+            localStorage.removeItem("fname");
+
+        }
+
+
+
+        
+    </script>
+
+</head>
+<body>
+    <form>
+        <label>Enter Name</label>
+        <input type="text" name="name" id="username" value="" />
+        <button id="btn2" onclick="f2()">Accept</button>
+        <input type="button" name="name" id="btn2" value="ShowData" onclick="f1()" />
+        <button id="btn1" onclick="f3()">Remove</button>
+        <input type="text" name="name"  id="Greetuser" value="" disabled />
+    </form>
+    <div id="greet"></div>
+
+</body>
+</html>
