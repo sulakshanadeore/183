@@ -6,6 +6,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+       
 
         $(document).ready(function () {
             $("p:not(.c5)").css({"background-color":"deeppink"});
@@ -30,17 +31,44 @@
             });
 
 
+            $("#division1").click(function () {
+                var content = $(this).html();
+                $("#result").text(content);//setting the value
+                //alert($("#result").text());
+                $('#p1').text(content);
+                //alert($('form').html());
+                //alert($('form').text());//retrieving the value
+                $('#username').val('Shankar');
+                var uname = $('#username').val();
+                alert(uname)
+                $("img").attr("height", "500");
+                $("img").attr("width", "500");
+                $("img").attr({width: "140", height: "140"});
+
+
+                alert($('img').attr("src"));
+
+
+            });
+            
+
+
     });
 
     </script>
 </head>
 <body>
-    <h1>Heading 1</h1>
+    <form>
+        <label>Enter naem </label>
+        <input type="text" id="username" name="name" value="" />
+    </form>
+    <!--<h1>Heading 1</h1>
     <p class="intro">Thsi is without style it will change to orange</p>
     <p class="c5">first(Zero) Para</p>
     <p class="c5">Second(First) Para</p>
     <p class="c5">Third(second) Para</p>
-    <p class="c5">Fourth(third) Para
+    <p class="c5">
+        Fourth(third) Para
         <ul id="choose">
             <li>A element</li>
             <li>B element</li>
@@ -60,6 +88,18 @@
 
     <button id="b1">click</button>
     <button id="b2">click</button>
+    <hr />-->
+
+
+    <p>Click on the square below:</p>
+    <span id="result" style="background-color:red;height:100px;width:40px">Thsis is span </span>
+    <p id="p1" style="background-color:aqua"></p>
+
+    <div id="division1" style="background-color:blue;">
+        This is Blue Square!!
+        <p>Thisi is p in div</p>
+    </div>
+    <img src="sunset.jpg" />
 
 </body>
 </html>
