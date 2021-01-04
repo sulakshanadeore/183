@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        function hideitems() {
+            document.getElementById("div1").style.display = "None";
+            document.getElementById("p1").style.display = "None";
+            document.getElementById("form1").style.display = "None";
+
+
+        }
+        function showitems() {
+            document.getElementById("div1").style.display = "inline";
+            document.getElementById("p1").style.display = "inline";
+            document.getElementById("form1").style.display = "inline-block";
+            var s="italic"
+            document.getElementById("p1").style.fontStyle = s;
+            document.getElementById("p1").style.fontWeight = "bold";
+
+
+        }
+
+        function passData(name, job) {
+            //var y = "16" + "Hello";
+            //var y;//undefined
+            //var y = "16";
+            //var y = 16;
+            //y = "Jai";
+
+            
+            document.getElementById("p1").innerHTML = "Welcome " + name + " for the role of" + job;
+
+        }
+
+        function check() {
+
+            var i = 10.4;
+            var j = "20";
+            var k = 20;
+            //var coname = "Mphasis";
+            var coname = new String();
+            coname = "Mphasis";
+
+            var d = new Date();
+            var p;
+            var b = [10, 20];
+            b = null;
+            var b1 = true;
+
+            alert(typeof (coname));
+            //if (i == k) ---- false
+            //if (j == k) ----- true
+
+            document.getElementById("checknos").innerHTML = (i == k) + "<br />" + (j == k) + "<br/>" + (j===k);
+            //document.getElementById("datatypes").innerHTML = typeof (i) + "<br/>" + typeof (coname) + "<br/>" + typeof (d) + "<br/>" + typeof (p) + "<br/>" + typeof (b) + "<br/>" + typeof (b1);
+            //===  matches types
+            //== match values
+            //alert("Null type is " + typeof (null));
+            //alert("Undefined type is " + typeof (undefined));
+
+
+            document.getElementById("div2").innerHTML = (null == undefined) + "<br/>" + (null === undefined);
+        }   
+
+
+        
+    </script>
+</head>
+<body onload="alert('Body loaded.....')" style="background-color:violet">
+
+    <div id="checknos" onclick="check()">click here</div>
+    <div id="datatypes" onclick="check()"></div>
+    <hr/>
+    <div id="div2" onclick="check()">click here</div>
+    <hr />
+    <p id="p1"></p>
+    <div id="div1">Thsi is div</div>
+    <script>
+
+        function f1(r) {
+            let i = 10;
+            //            let pi = 3.14;
+            const pi = 3.14;
+            //2015--- introduced
+            var d = pi * r * r;
+            alert(d);
+            document.getElementById('div1').innerHTML = d;
+            return d;
+
+        }
+
+        function Calculateinterest(p, n, r) {
+            return (p * n * r) / 100;
+        }
+
+
+        function stringlength() {
+            var len = document.getElementById('t1').value.length;
+            if (len > 5) {
+                document.getElementById('t1').value = "";
+                alert('Cannot be greater than 5');
+
+            }
+
+        }
+        //This is a comment.--- single line comment
+        /*
+          Thsisi s  sfsf
+          multi line comment
+
+         */
+
+    </script>
+    <div style="height:20px;width=40px;color:gray" onclick="f1(3)">Click the div here</div>
+
+    <button onclick="hideitems()">Hide</button>
+    <button onclick="showitems()">Show</button>
+    <button onclick="passData('Shirin','Developer')">Call PassData</button>
+    <form>
+        <label>Enter Principal :</label>
+        <input type="number" name="p" id="p1" value="" />
+        <br />
+        <label>Enter years :</label>
+        <input type="number" name="n" id="n1" value="" />
+        <br />
+        <label>Enter Rate of Interest :</label>
+        <input type="number" name="r" id="r1" value="" />
+        <br />
+        <!--<label>Enter :</label>
+        <input type="text" name="name" value="" />-->
+        <input type="button" name="name" onclick="interest.value = Calculateinterest(p.value, n.value, r.value)" value="Calculate" />
+        <input type="text" name="interest" value="" />
+
+        <input type="text" id="t1" onmousedown="console.log('mouse down fired')" onmouseup="console.log('mouse up fired');" 
+               onchange="stringlength()" 
+               onmousemove="console.log('mouse move fired')" onmousewheel="console.log('mouse wheel fired')" onkeydown="console.log('key down event')" 
+               onkeyup="console.log('key up event')"  onkeypress="console.log('key press event')"   value="" />
+    </form>
+</body>
+</html>
