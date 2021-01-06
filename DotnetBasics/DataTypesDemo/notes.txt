@@ -1,0 +1,9 @@
+﻿struct
+can include constructors,constants,fields,
+methods,indexers,properties, etc
+struct cannot have non-parameterised constructor,
+only parameterised constructors.
+struct hold small data value that dont require
+inheritance
+
+structure is internal.
