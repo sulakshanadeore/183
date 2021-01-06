@@ -65,9 +65,20 @@ namespace DataTypesDemo
             student.CalculateTotalMarks();
             student.displayData();
 
-            
 
+            //object is the largest type in the hierarchy of datatypes
+            //object o1 = 34.45d;
+            object o;
+            int i = 10444;
+            o = i;
+            //Assigning a value type to a heap based reference type --- boxing
+            int getback;
+            getback =(int) o;
+            //If  a bigger type into smaller there is chance of losing the whole value only
+            //a part of value will  go to the smaller type
 
+            float pi = 3.14f;
+            int m =(int) pi;
 
           //  int i=100;
           //  Int32 j=34;

@@ -1,0 +1,86 @@
+﻿
+	Object Oriented Programming 
+
+	Importance ----- data along with code ---- once we create Object---- we can reuse it as many
+										objects you create
+
+	Prior to OOP---- Procedural Programming---- 'C' ------revolved/importance is code.--- 
+							functions and procedures-- Reusability---- structs.
+
+
+	Object Oriented Programming--- 
+	1) Abstraction
+	2) Encapsulation
+	3) Inheritance 
+	4) Polymorphism
+
+
+	1) Abstraction---- hiding the unwanted data/code. simple thing to represent complex code.
+	 TV----- button --press--- tv starts.
+
+	2) Encapsulation----wrapping the code/data for security purpose.
+	  disallowing open access to the data/code inside.
+
+	3) Inheritance---- Reusability but in a controlled manner.
+	     Encapsulating data/code from unauthorised access.
+
+	4)Polymorphism---- (poly---many) (morphism-forms)
+	 different meaning to same word to mean different in different contexts.
+
+	 going out---- trekking
+				-----break
+				------lunch
+				------get- together
+
+    add------- 2 nos----- 2 int, 2 float, 2 double,2 single,1 int & 1 float,1 float & 1 double....
+	...................................................
+		------ 2 strings
+		-------concat numbers
+		
+		*******************************************************
+		
+		
+How  to implement oops?
+1)Abstraction---- 
+create different useful,reusable tools.
+For example: A programmer define different types of objects---
+
+variables,functions or data structure(array, stack,linked list, queue,trees,class)etc.
+
+Address----- 
+
+struct Address
+{
+string city,
+string state,
+string streetno,
+double pincode,
+int houseno
+}
+
+
+int i;
+
+
+Address EmployeeAddress;
+Address customerAddress;
+Address StudentAddress;
+
+
++91 020 289 643 1156
+
+struct Landline
+{
+string n;
+
+}
+
+object o;
+
+2) Encapsulation---- works with the help of access specifiers
+
+private
+public 
+internal
+protected 
+protected internal
