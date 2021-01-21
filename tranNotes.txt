@@ -1,0 +1,38 @@
+   transaction
+
+single unit of work.
+ie . a single sql statement/set of statements  is called as a transaction.
+start t1
+insert-- succeed/fail
+update---succeed/fail
+end t1
+
+t1 succeeds---commit
+t1 fails-- rollback
+
+
+acid-----properties of a transaction
+atomocity
+consistency
+isolation
+durability
+
+
+1)TransactionScope class
+
+Complete()---->commit
+Dispose()----> rollback
+
+2) SqlTransaction Class
+ Commit()
+ Rollback()
+
+
+
+Why TransactionScope?
+1)Transaction Scope is better option
+because it can be used for any number of transactions in the  scope.
+2)It allows you to nest calls to other methods  that might require the tran.
+3) With transope as long the scope exists it will handle everything.
+This makes your code clean and more maintainable.
+4)MS DTC(Microsoft Distributed Tansaction Coordinator) for tran management
