@@ -1,0 +1,117 @@
+1) Clustered index--- default ordering
+-------------------------------
+2) try- catch-- severity level
+-------------------------------------
+3) procedure1--- 
+{
+
+}
+procedure2 
+{
+
+}
+1) it won't allow
+2) p1 would be deleted successully
+3) Both will be deleted
+4) 
+-------------------------------------
+4)
+which keyword is used to return value of a variable from stored procedure
+Answer-- output
+------------------------------------------------
+5) create procedure p1
+(@n1 int,
+@n2 int,
+@res int output)
+as
+begin
+set @res=@n1+@n1
+print (cast(@res as varchar))
+end
+
+---------------------------
+6) for(i=0;i<10;i++)
+while--- (i<=10)---answer
+if-else
+case--
+----------------------
+7)
+nvl2 has only 2 parameters
+ nullif
+---------------------
+9) Components of database
+database engine
+reporting server
+analysis server
+-------------------------
+10)row-  tuple 
+ column--attribute
+table---relation
+--------------------------
+11) 1-1
+1-M
+M-N
+-------------------------
+12) which integrity to ensure the value in  column are in specified range.
+
+check----
+check constraint enforce domain integrity
+
+-------------
+By default it is off
+when off cannot give explicit value for identity insert
+set IDENTITY_INSERT on--- explicit value is permitted 
+
+it is given on table
+set IDENTITY_INSERT customer on
+----------------------------------
+create procedure p1
+
+begin
+num,varchar(10)
+end
+which of the following are right
+cast(num,varchar(10)
+---------------------------
+which aggregate functions are used in date
+count--A
+max--A
+min--A
+avg
+
+-----------------
+create procedure p1
+(@n1 int,
+@n2 int,
+@res int output)
+as
+begin
+set @res=@n1+@n1
+print (cast(@res as varchar))
+end
+---------
+street
+deptid
+regno
+id
+---------
+when bcnf is to be applied
+a)when candidate keys are overlapped
+b)when it has 2 candidate keys
+c)when candidate keys are composite keys
+d)None of the above
+---------------------
+severity levels
+0–10 Informational messages
+11–18 Errors
+19–25 Fatal errors
+-------------------
+
+
+
+
+
+
+
+
+
