@@ -1,81 +1,172 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BAL;
+using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 namespace DAL
 {
     public class EmployeeDAL
     {
-        public void InsertEmployee(EmployeesBAL bal)
+        
+        public void InsertEmployee(EmployeesBAL emp)
+        {
+            SqlDataAdapter da;
+            DataSet ds;
+            PopulateData(out da, out ds);
+            DataRow drow = ds.Tables["employees"].NewRow();
+            drow["LastName"] = emp.LastName;
+            drow["FirstName"] = emp.FirstName;
+            drow["Title"] = emp.Title;
+            drow["TitleOfCourtesy"] = emp.TitleOfCourtesy;
+
+            ds.Tables["employees"].Rows.Add(drow);
+
+            SqlCommandBuilder bldr = new SqlCommandBuilder(da);
+            da.Update(ds, "employees");
+
+
+        }
+
+        private static void PopulateData(out SqlDataAdapter da, out DataSet ds)
         {
             SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["NWcnString"].ConnectionString);
 
+            da = new SqlDataAdapter("select * from employees", cn);
+            ds = new DataSet();
+            da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            da.Fill(ds, "employees");
+        }
+
+        //private static void PopulateData(out SqlDataAdapter da, out DataSet ds)
+        //{
+
+
+        //}
+
+        public void UpdateEmployee(EmployeesBAL emp)
+        {
+            SqlDataAdapter da;
+            DataSet ds;
+            PopulateData(out da, out ds);
+
+            DataRow found=ds.Tables["employees"].Rows.Find(emp.EmployeeID);
+            found["FirstName"] = emp.FirstName;
+            found["LastName"] = emp.LastName;
+            found["Title"] = emp.Title;
+            found["TitleOfCourtesy"] = emp.TitleOfCourtesy;
+
+            SqlCommandBuilder bldr = new SqlCommandBuilder(da);
+            da.Update(ds, "employees");
+
+
+
+
+        }
+
+        public void DeleteEmployee(int empid)
+        {
+            SqlDataAdapter da;
+            DataSet ds;
+            PopulateData(out da, out ds);
+            //DataRow found = ds.Tables["employees"].Rows.Find(empid);
+            //found.Delete();
+
+            ds.Tables["employees"].Rows.Find(empid).Delete();
+
+
+            SqlCommandBuilder bldr = new SqlCommandBuilder(da);
+            da.Update(ds, "employees");
+
+
+
+
+
+
+        }
+
+        public void createFile()
+        {
+            DataSet ds = ShowData();
+
+            ds.WriteXml("abc.xml");
+            ds.WriteXmlSchema("abcd.xsd");
+
+        }
+
+
+
+        public DataTable EmployeeDataTable()
+        {
+
+            DataSet ds = ShowData();
             
+            return ds.Tables["employees"];
+        }
 
-            SqlCommand cmd = new SqlCommand("sp_InsertEmployee", cn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@p_lastname", bal.LastName);
-            cmd.Parameters.AddWithValue("@p_firstname", bal.FirstName);
-            cmd.Parameters.AddWithValue("@p_titleofcourtesy", bal.TitleOfCourtesy);
-            int catid = 101;
-            string catname = "New category";
-            string description = "Some description";
-            string insertstring = "insert into categories(categoryname,description) values(" + "'" + catname + "','" + description + "')";
-            SqlCommand cmd1 = new SqlCommand(insertstring,cn);
-            SqlTransaction tran = null;  
 
-            //insert into categories (catname,catdesc) values ('cateogoryname','Some description category')
-            cn.Open();
-            try
+        public List<EmployeesBAL> showEmpList()
+        {
+            DataSet ds = ShowData();
+            List<EmployeesBAL> list = new List<EmployeesBAL>();
+            int cnt = ds.Tables["employees"].Rows.Count;
+            for (int i = 0; i < cnt; i++)
             {
+                EmployeesBAL emp = new EmployeesBAL();
 
-                tran = cn.BeginTransaction();
-                cmd.Transaction = tran;
-                int i = cmd.ExecuteNonQuery();//u/d
-                cmd1.Transaction = tran;
-                cmd1.ExecuteNonQuery();
-                tran.Commit();
-            }
-            catch (SqlException ex)
-            {
-                tran.Rollback();
-                throw ex;
+                DataRow drow_i = ds.Tables["employees"].Rows[i];
+                emp.EmployeeID = Convert.ToInt32(drow_i["EmployeeID"]);
+                emp.FirstName = drow_i["FirstName"].ToString();
+                emp.LastName = drow_i["LastName"].ToString();
+                emp.Title = drow_i["Title"].ToString();
+                emp.TitleOfCourtesy = drow_i["TitleOfCourtesy"].ToString();
+                list.Add(emp);
+
 
             }
-            finally
-            {
-                cn.Close();
-                cn.Dispose();
-            }
-            
+            return list;
+        }
+
+        private static DataSet ShowData()
+        {
+            SqlDataAdapter da;
+            DataSet ds;
+            //DataSet ds = PopulateData();
+            SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["NWcnString"].ConnectionString);
+
+            da = new SqlDataAdapter("select * from employees", cn);
+            ds = new DataSet();
+            da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            da.Fill(ds, "employees");
+
+            SqlDataAdapter da1 = new SqlDataAdapter("select * from categories", cn);
+            da1.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            da1.Fill(ds, "categories");
 
 
-            //SqlCommand cmd = new SqlCommand("select * from employees",cn);
-            ////select/insert/update/delete/functionname/procedurename
 
-
-            ////SqlCommand cmd = new SqlCommand();
-            ////cmd.CommandText = "select * from employees";
-            ////cmd.Connection = cn;
+            return ds;
+        }
 
 
 
-            ////select----ExecuteReader()
-            //SqlDataReader dr=cmd.ExecuteReader();
-            ////dr.Read();----loop
-            //dr.Read();
-            //if (dr.Read())
-            //{
-            //    Console.WriteLine(dr["EmployeeID"].ToString() + " " + dr["LastName"].ToString() + "  " + dr["FirstName"].ToString());
-            //}
-            // cn.Close();
-            //cn.Dispose();
+        public EmployeesBAL FindEmployee(int empid)
+        {
+            SqlDataAdapter da;
+            DataSet ds;
+            PopulateData(out da, out ds);
+            DataRow drow=ds.Tables["employees"].Rows.Find(empid);
 
+            EmployeesBAL emp = new EmployeesBAL();
+            emp.EmployeeID =Convert.ToInt32(drow["EmployeeID"]);
+            emp.FirstName = drow["FirstName"].ToString();
+            emp.LastName = drow["LastName"].ToString();
+            emp.Title= drow["Title"].ToString();
+            emp.TitleOfCourtesy = drow["TitleOfCourtesy"].ToString();
+            return emp;
 
 
         }
