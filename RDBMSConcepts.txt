@@ -1,0 +1,455 @@
+ 		RDBMS
+
+  Codd's rules
+12 rules
+    6 rules==== Half RDBMS
+    >6 rules------ Full RDBMS
+
+Data 2 types
+	User kept data---- Actual data
+	metadata/data about data---- empid--number
+				     ename--string
+				     joining date---date
+
+        
+
+Dr.Edgar F Codd
+
+	1) Information rule--- Everything in the database must be stored in table format.
+	User kept data---- Actual data
+	metadata/data about data---- empid--number
+				     ename--string
+				     joining date---date
+
+	
+ 	2) Guaranteed Access Rule
+		Every single data saved must be accessible logically with a table-name(relation),
+		the data must be stored under a column(attribute)
+		the data must be stored in  a row(row value/tuple)
+and every row/tuple must be identified by  a primary key.
+
+	3) Systematic treatment of null values
+		 the null treated specially different from  other values like space,0.
+		 this uniform treatment of null values is important --- 
+		a)data is missing
+		b) data is not known
+		c) is not applicable
+
+Case a) 
+example: commission only applicable for salesman.
+	but all employees are having salaries greater than 0.
+job-  SALESMAN----- comm will be applicable >=0
+job---NOT SALESMAN(MGR,CLERK,OE)etc------- Comm----- will be "null"
+	IS NOT APPLICABLE
+
+Case b) Bank Account---- Data is not known
+
+	Account Opening Form------ All details
+	Account No:(Only for office use)
+
+
+ Case c) Joining Details ----Company----- data is missing
+	Passport No:
+     saved in the db of the company
+         
+	
+--------------------------------------------------------------------
+
+	4) Active Online Catalog/Data Dictionary
+system_tables
+
+        user_tables
+--------------------------special table---- in the db & by the db------automatically updated
+ Employee---- Info(data about data)
+	Empid---- pk  --number
+	Deptno---fk---- number
+	ename------length of ename >0 and <50---string
+        sal > 0-----number
+	comm  null---- number
+        JoiningDate------- not null----date
+	Marital Status-----not null----bool
+	Dependents---- number
+
+Location/Address----add
+Dependents: remove
+
+	5) Comprehensive Data Sub-Language Rule-----
+
+ 	SQL------- Structured Query Language---- 
+		SQL--- ANSI syntax----- (std language) ---- R/I/U/D operations
+		Product Specific Syntax---- 
+			
+			cube
+			rollup
+			
+          language --- database language--- common to all databases
+	summary of the data/
+	insert/
+	update/
+	delete
+
+
+*******	6) View Updating rule/View Update Rule-------- Partially supported rule by all the databases
+
+		view is a object like a table--- 
+	table stores the data physically in it
+	view references the table for the data---- virtual table
+	created for security purpose so that the whole data is not exposed to the end user  directly
+1)Simple view-----
+	updates itself with a simple sql query--- updates successfully------ table.
+2)Complex view----join,subquery,aggregate, etc...
+	Non Updateable views
+	(Logically)---- 
+it works on multiple rows of the data-- and one row only can be updated at a time 
+is the rule of updation  --- all rows not updated and  so the table 
+doesnot updated , so view is also not updated.
+because view fetches the data from the table.
+
+        7) High Level Insert/Update/Delete Rule
+
+	Must support High Insert, Update, Delete. It must also support union,intersection and minus
+operations.
+	SetA		SetB
+	a		a
+	b		b
+	c		
+Union----- a,b,c
+intersection---- a,b
+minus--------c
+
+Datatypes---- columns sequnece in the query must match
+	TableA---- Employee 
+	n	S    n
+	Empid Ename Sal
+	1	A	10K
+	2	B	20K	
+	3	C	30K
+
+
+	TableB----- Customer
+	n	    n         s	
+	CustID    Points       Custname 
+	1		10K	A
+	2		20K	B
+	3		30K	C
+	4		20K  	J
+
+
+union------1,2,3,4
+
+	1	A	10K
+	2	B	20K	
+	3	C	30K
+	1		10K	A
+	2		20K	B
+	3		30K	C
+	4		20K  	J
+
+union all--------
+	1	A	10K
+	2	B	20K	
+	3	C	30K
+	4		20K  	J
+
+
+
+intersect--- 1,2,3
+	1	A	10K
+	2	B	20K	
+	3	C	30K
+minus
+	4		20K  	J
+
+
+	8) Physical Data Independence
+
+DB
+Table -Employee
+	n	S    n
+	Empid 	Deptno	City Adhar		Ename Sal			
+	1					A	10K
+	2			  		B	20K	
+	3					C	30K
+	
+HRApp---- 
+
+The application must not be affected even if u make physical changes to your table
+
+
+	9) Logical Data Independence--- merging data/split data
+
+		Physical View
+DB
+Table -Employee
+	n	S    n
+	Empid 	Deptno	City Adhar		Ename Sal			
+	1					A	10K
+	2			  		B	20K	
+	3	
+10 rows
+
+Table --- Emp 
+
+	
+	
+		Logical View
+HRApp---- must work efficiently ------
+
+
+	10) Integrity Rule
+		Integrity--- Entity Integrity &	Referential Integrity
+1) Entity Integrity------ Table/Relation-------PK
+2) Referential Integrity------Table----- it must be (pk) FK
+
+
+		1) Wholeness----- complete
+		2) Correctness of data------ true data
+
+
+Referencing ----FK 				Dept----PK
+	in emp table----deptno   ||||| ---ref--dept-----deptno
+		Student
+		Rno Name Marks
+		1   A	11
+		2   B	12
+		3   A	
+
+	Emp -
+        PK
+	(Composite PK--- Empno+Ename)
+	Empno ename sal  deptno	Loc		PanID
+	1	A    10k  10	Chennai		AJMPD34234
+        2       A    15k  10	Chennai         AJMYY32342
+
+	3       C    10k  null(data is unknown)
+
+	Dept
+	Deptno Dname Loc
+	10	A     A1
+ 	20	B	B1
+	30 	C	C1
+	40 	D	null
+	
+PK--- Primary key----- unique and it cannot be null
+
+FK----Foreign key-------can have repeating values and it can be NULL
+
+
+	11) Distribution Independence
+		Distributed Databases
+	UKDB
+	USDB
+	IndiaDB
+
+	Employees
+	Empno Ename Sal deptno mgr joiningDate
+
+
+EmployeesUS
+EmployeesUK
+EmployeesIn
+
+	show all the employees------ 
+     distributed data
+
+	12) Non-Subversion Rule
+security mechanism --cannot -- bypass by any means
+		
+
+
+**********************************************************
+  Normalization
+_________________
+Its a process followed for REDUCING/REDUCE the redundancy of data and organizing the data.
+Anomalies (Deviations) occur if the database is not normalised.
+-------
+3 types
+1)Insert
+2)Update 
+3) Delete
+
+1) Insertion Anomaly
+	emp
+	
+	empid ename city	ProjectCode
+        1	A    Pune 	10
+	2	B    Pune 	20
+	3 	C    Chennai 	30
+	4	D    Delhi      40
+ 	4 	D    Delhi 	50
+
+If a trainee joins as  a employee=== project code cannot be assigned so insertion not possible.
+
+Update Anomaly
+	If one person is working on 2 projects, and I want to update his city, updation not possible
+
+Delete Anomaly
+	If project closes down due to completion and so if I want to delete project code 20
+then employee data also gets deleted, so this a delete anomaly, because that (emp) data  is not available anywhere else.
+
+To overcome above problems, we need normalization.
+Normalization Common Forms
+ a) First Normal Form (1 NF)
+ b) Second Normal Form (2 NF)
+ c) Third Normal Form (3 NF)
+ d) Boyce Codd Normal Form(BCNF)
+ e)  Domain Key Normal Form (DKNF)
+
+    1NF
+------------
+An attribute(column) of a table cannot hold multiple values. It should hold atomic(single) values
+
+
+	emp
+	empid ename  city       mobileno
+        1	A     Pune	234242423
+	2	B     Pune	234242123/5757575
+
+ this is not 1NF
+
+	emp
+	empid ename  city       mobileno
+        1	A     Pune	234242423
+	2	B     Pune	234242123 or 5757575
+or 
+
+	emp
+	empid ename  city       mobileno
+        1	A     Pune	234242423
+	2	B     Pune	234242123
+	2 	B     Pune	5757575
+
+2NF
+_________
+
+1) If it is 1NF
+2) No non-prime attribute is dependent on the proper subset of any candidate key of table.
+	An attribute that is not a part of candidate key is known as non-prime attribute.
+
+
+Example:
+
+teacher
+	t_id	subject	t_age
+-------------------------------
+	1	Hist	34
+	1	Geog	34
+	2  	Bio 	45
+	3	Phy	30
+	3	Maths	30
+
+CandidateKeys------ teacherid,subject
+Non-prime attribute------age
+
+teacher_subject
+----------------
+	t_id subject
+	1	hist
+	1 	Geog
+	2	Bio
+	3	Phy
+	3	Maths
+
+TeacherPersonalData
+-----------------
+	T_id   Name City University  Age	
+	1				34
+	2				45
+	3				30
+
+3 NF
+_____
+
+ 1) it is  2nf
+ 2) Transitive fucntional dependency of non-prime attribute on any super key should be removed.
+	An attribute that is not a part of any candidate key is non prime attribute.
+
+
+Example:  If u have  table called "A"
+For each functional dependency, X -> Y atleast one of the them must be true:
+  a) X is a super key(primary key) of the table A
+  b) Y is a prime attribute of the table A
+
+empid   name    pincode state  city    district
+1	A        3224	  UP	Agra    A1
+2	B	 5555	  TN	Chennai Kanchipuram
+3	C	 5555	  TN	Chennai Tiruvallur 	
+4       D	 1223     Karnataka Banglore B1
+
+
+Super Keys
+PK combinations
+1)empid
+2)empid+name
+3)empid+district+city
+4)empid+name+pincode+State+city+district
+
+Candidate Key
+empid
+
+Non-prime
+except empid all are non-prime
+
+State,City,District ------pincode------ depends on Employee ID
+non----- prime			5555	       super key (2)
+
+3NF
+
+employee-
+empid   name    pincode
+1	A        3224
+
+
+
+EmpAddressDetails
+
+pincode state  city    district
+3224	  UP	Agra    A1
+
+BCNF-----3.5NF--- stricter version of 3NF
+_________________________________________
+
+It must be 3NF
+A table complies that every functional dependency X->Y, x should be super key of the table
+
+A employee working in more than 1 dept
+
+
+	empid ename city	ProjectCode Projectname duration
+        1	A    Pune 	10		P1	60
+	2	B    Pune 	20		P2	60
+	3 	C    Chennai 	30		P3	90
+	4	D    Delhi      40		P4	90
+ 	4 	D    Delhi 	50		P5 	120
+
+
+
+emp
+	PK
+	empid ename city
+	1	A    Pune
+	2	B    Pune
+	3 	C    Chennai
+	4	D    Delhi 
+
+project 
+	PK
+	ProjectCode Projectname duration
+	10		P1	60
+	20		P2	60
+	30		P3	90
+	40		P4	90
+	50		P5 	120
+
+
+Emp-Project
+	FK		FK
+	ProjectCode  Empid
+	10		1
+	20		2
+	30		3
+	40		4
+	50		4
+		
+**********************************************************
+  Constraints
